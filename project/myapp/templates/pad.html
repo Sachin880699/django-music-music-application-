@@ -1,0 +1,259 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="apple-touch-icon" type="image/png" href="https://static.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+<meta name="apple-mobile-web-app-title" content="CodePen">
+<link rel="shortcut icon" type="image/x-icon" href="https://static.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+<link rel="mask-icon" type="" href="https://static.codepen.io/assets/favicon/logo-pin-8f3771b1072e3c38bd662872f6b673a722f4b3ca2421637d5596661b4e2132cc.svg" color="#111" />
+<title>CodePen - Drum Pad</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+<style>
+
+h1 {
+  color: #fff;
+  font-size: 5vw;
+  letter-spacing: 6px;
+}
+
+.pad {
+  width: 500px;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-pack: justify;
+          justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.box {
+  width: 100px;
+  height: 100px;
+  margin: 10px 0;
+  box-shadow: 0 8px 6px -6px black;
+  background-color: #444;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+          align-items: center;
+  font-size: 20px;
+  color: rgba(255, 255, 255, 0.4);
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+.box:hover {
+  background-color: #5e5e5e;
+  cursor: pointer;
+}
+.box:active {
+  background-color: #2b2b2b;
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+  -webkit-transition: all .2s;
+  transition: all .2s;
+}
+
+.active {
+  background-color: #2b2b2b;
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+  -webkit-transition: all .2s;
+  transition: all .2s;
+}
+
+.pad-1, .pad-2, .pad-3, .pad-4 {
+  border: 2px solid #2ecc71;
+}
+
+.pad-5, .pad-6, .pad-7, .pad-8 {
+  border: 2px solid #E5446D;
+}
+
+.pad-9, .pad-10, .pad-11, .pad-12 {
+  border: 2px solid #1abc9c;
+}
+</style>
+<script>
+  window.console = window.console || function(t) {};
+</script>
+<script>
+  if (document.location.search.match(/type=embed/gi)) {
+    window.parent.postMessage("resize", "*");
+  }
+</script>
+</head>
+<body translate="no">
+<h1>DRUM PAD</h1>
+<div class="pad">
+<div class="box pad-1" data-code="82">R</div>
+<div class="box pad-2" data-code="84">T</div>
+<div class="box pad-3" data-code="89">Y</div>
+<div class="box pad-4" data-code="85">U</div>
+<div class="box pad-5" data-code="70">F</div>
+<div class="box pad-6" data-code="71">G</div>
+<div class="box pad-7" data-code="72">H</div>
+<div class="box pad-8" data-code="74">J</div>
+<div class="box pad-9" data-code="86">V</div>
+<div class="box pad-10" data-code="66">B</div>
+<div class="box pad-11" data-code="78">N</div>
+<div class="box pad-12" data-code="77">M</div>
+</div>
+<script src="https://static.codepen.io/assets/common/stopExecutionOnTimeout-157cd5b220a5c80d4ff8e0e70ac069bffd87a61252088146915e8726e5d9f147.js"></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
+<script id="rendered-js">
+$(document).ready(function () {
+
+  var padOne = new Audio('https://s3-us-west-2.amazonaws.com/s.cdpn.io/242518/SD0025.mp3');
+  $('.pad-1').mousedown(function () {
+    padOne.load();
+    padOne.play();
+  });
+
+  var padTwo = new Audio('https://s3-us-west-2.amazonaws.com/s.cdpn.io/242518/SD0010.mp3');
+  $('.pad-2').mousedown(function () {
+    padTwo.load();
+    padTwo.play();
+  });
+
+  var padThree = new Audio('https://s3-us-west-2.amazonaws.com/s.cdpn.io/242518/SD0000.mp3');
+  $('.pad-3').mousedown(function () {
+    padThree.load();
+    padThree.play();
+  });
+
+  var padFour = new Audio('https://s3-us-west-2.amazonaws.com/s.cdpn.io/242518/RS.mp3');
+  $('.pad-4').mousedown(function () {
+    padFour.load();
+    padFour.play();
+  });
+
+  var padFive = new Audio('https://s3-us-west-2.amazonaws.com/s.cdpn.io/242518/OH25.mp3');
+  $('.pad-5').mousedown(function () {
+    padFive.load();
+    padFive.play();
+  });
+
+  var padSix = new Audio('https://s3-us-west-2.amazonaws.com/s.cdpn.io/242518/MA.mp3');
+  $('.pad-6').mousedown(function () {
+    padSix.load();
+    padSix.play();
+  });
+
+  var padSeven = new Audio('https://s3-us-west-2.amazonaws.com/s.cdpn.io/242518/CY0010.mp3');
+  $('.pad-7').mousedown(function () {
+    padSeven.load();
+    padSeven.play();
+  });
+
+  var padEight = new Audio('https://s3-us-west-2.amazonaws.com/s.cdpn.io/242518/CH.mp3');
+  $('.pad-8').mousedown(function () {
+    padEight.load();
+    padEight.play();
+  });
+
+  var padNine = new Audio('https://s3-us-west-2.amazonaws.com/s.cdpn.io/242518/CB.mp3');
+  $('.pad-9').mousedown(function () {
+    padNine.load();
+    padNine.play();
+  });
+
+  var padTen = new Audio('https://s3-us-west-2.amazonaws.com/s.cdpn.io/242518/BD0010.mp3');
+  $('.pad-10').mousedown(function () {
+    padTen.load();
+    padTen.play();
+  });
+
+  var padEleven = new Audio('https://s3-us-west-2.amazonaws.com/s.cdpn.io/242518/BD0000.mp3');
+  $('.pad-11').mousedown(function () {
+    padEleven.load();
+    padEleven.play();
+  });
+
+  var padTwelve = new Audio('https://s3-us-west-2.amazonaws.com/s.cdpn.io/242518/CP.mp3');
+  $('.pad-12').mousedown(function () {
+    padTwelve.load();
+    padTwelve.play();
+  });
+
+
+  $(window).keydown(function (e) {
+    var code = e.keyCode;
+    var kc = String.fromCharCode(e.keyCode);
+    $("div[data-code='" + code + "']").addClass("active");
+    console.log(code);
+
+    switch (kc) {
+      case "R":
+        padOne.load();
+        padOne.play();
+        break;
+      case "T":
+        padTwo.load();
+        padTwo.play();
+        break;
+      case "Y":
+        padThree.load();
+        padThree.play();
+        break;
+      case "U":
+        padFour.load();
+        padFour.play();
+        break;
+      case "F":
+        padFive.load();
+        padFive.play();
+        break;
+      case "G":
+        padSix.load();
+        padSix.play();
+        break;
+      case "H":
+        padSeven.load();
+        padSeven.play();
+        break;
+      case "J":
+        padEight.load();
+        padEight.play();
+        break;
+      case "V":
+        padNine.load();
+        padNine.play();
+        break;
+      case "B":
+        padTen.load();
+        padTen.play();
+        break;
+      case "N":
+        padEleven.load();
+        padEleven.play();
+        break;
+      case "M":
+        padTwelve.load();
+        padTwelve.play();
+        break;
+      default:}
+
+  });
+
+  $(window).keyup(function (e) {
+    var code = e.keyCode;
+    $("div[data-code='" + code + "']").removeClass("active");
+  });
+
+});
+//# sourceURL=pen.js
+    </script>
+</body>
+</html>
+
+
+{% endblock %}

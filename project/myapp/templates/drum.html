@@ -1,0 +1,355 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Music </title>
+<style>
+@import url(https://fonts.googleapis.com/css?family=Handlee|Pacifico);
+
+html,
+body {
+	padding: 0;
+	margin: 0;
+	background-color: #fff;
+}
+
+.main-wrapper {
+	margin: 30px auto 0;
+	width: 1080px;
+	text-align: center;
+}
+
+.main-title {
+	font-family: 'Pacifico', cursive;
+	text-align: center;
+	font-size: 3.2em;
+	color: #cb2026;
+	text-shadow: 1px 1px 1px #5a0b0d;
+}
+
+.drum-kit-wrapper {
+	position: relative;
+	width: 600px;
+	margin: -100px auto 0;
+}
+
+.drum-kit {
+	width: 100%;
+	height: 520px;
+	position: relative;
+}
+
+.crash-cymbal {
+	position: absolute;
+	top: 114px;
+    left: 80px;
+    transform: rotate(-7.2deg) scale(1.5);
+    transition: all ease-in-out .042s;
+}
+
+.hihat-top-cymbal {
+	position: absolute;
+    top: 166px;
+    right: 71px;
+    transform: scale(1.35);
+    z-index: 0;
+    transition: all ease-in-out .042s;
+}
+
+.key {
+	display: inline-block;
+	transition: all ease-in-out .042s;
+	position: absolute;
+	background: #eaeaea;
+    font-size: 1.5em;
+    height: 32px;
+    width: 32px;
+    text-align: center;
+    border-radius: 4px;
+    border: 3px solid #aaa;
+    color: #444;
+    box-shadow: 1px 1px 1px rgba(0,0,0,.65);
+    z-index: 2;
+}
+
+.key.kick {
+	top: 355px;
+    right: 250px;
+}
+
+.key.kick2 {
+    top: 355px;
+    right: 308px;
+}
+
+.key.snare {
+	right: 145px;
+    top: 280px;
+}
+
+.key.tom-high {
+	right: 227px;
+    top: 240px;
+}
+
+.key.tom-mid {
+	left: 222px;
+    top: 220px;
+}
+
+.key.tom-low {
+	top: 320px;
+    left: 133px;
+}
+
+.key.crash {
+	top: 80px;
+    left: 75px;
+}
+
+.key.ride {
+	left: 165px;
+    top: 87px;
+}
+
+.key.hihat-open {
+	right: 165px;
+    top: 144px;
+}
+
+.key.hihat-close {
+	right: 60px;
+    top: 150px;
+}
+
+.playing {
+	transform: scale(1.12);
+}
+
+.key-map-wrapper {
+	position: absolute;
+    right: 0;
+    top: 0;
+    height: 700px;
+    background: #111;
+    width: 250px;
+    z-index: 3;
+}
+
+.key-map-wrapper > h2 {
+	color: #fff;
+	font-family: 'Handlee', cursive;
+	margin-bottom: 35px;
+	border-bottom: 1px solid #fff;
+    padding-bottom: 20px;
+}
+
+.key-map-list {
+	list-style: none;
+	color: #fff;
+	text-align: left;
+}
+
+.key-map-list > li {
+	margin-bottom: 25px;
+}
+
+.key-code {
+	color: #444;
+    background-color: #eaeaea;
+    font-size: 1.25em;
+    padding: 5px 10px;
+    border-radius: 4px;
+    border: 3px solid #aaa;
+}
+
+.key-sound {
+	font-size: 1.2em;
+	margin-left: 10px;
+	font-family: 'Handlee', cursive;
+	vertical-align: middle;
+}
+</style>
+<script>
+  window.console = window.console || function(t) {};
+</script>
+<script>
+  if (document.location.search.match(/type=embed/gi)) {
+    window.parent.postMessage("resize", "*");
+  }
+</script>
+</head>
+<body translate="no">
+<main>
+<section class="main-wrapper">
+<div class="key-map-wrapper">
+<h2>Key Mapping</h2>
+<ul class="key-map-list">
+<li>
+<kbd class="key-code">E</kbd>
+<span class="key-sound">Crash</span>
+</li>
+<li>
+<kbd class="key-code">R</kbd>
+<span class="key-sound">Ride</span>
+</li>
+<li>
+<kbd class="key-code">F</kbd>
+<span class="key-sound">Floor tom</span>
+</li>
+<li>
+<kbd class="key-code">G</kbd>
+<span class="key-sound">Mid tom</span>
+</li>
+<li>
+<kbd class="key-code">H</kbd>
+<span class="key-sound">High tom</span>
+</li>
+<li>
+<kbd class="key-code">V</kbd>
+<kbd class="key-code">B</kbd>
+<span class="key-sound">Kick</span>
+</li>
+<li>
+<kbd class="key-code">J</kbd>
+<span class="key-sound">Snare</span>
+</li>
+<li>
+<kbd class="key-code">I</kbd>
+<span class="key-sound">Hi-Hat Open</span>
+</li>
+<li>
+<kbd class="key-code">K</kbd>
+<span class="key-sound">Hi-Hat Closed</span>
+</li>
+</ul>
+</div>
+<h1 class="main-title">JavaScript Drum Kit</h1>
+<div class="drum-kit-wrapper">
+<img id="crash-ride" class="crash-cymbal" src="https://raw.githubusercontent.com/ArunMichaelDsouza/javascript-30-course/master/src/01-javascript-drum-kit/img/crash.png" alt="Crash cymbal">
+<img id="hihat-top" class="hihat-top-cymbal" src="https://raw.githubusercontent.com/ArunMichaelDsouza/javascript-30-course/master/src/01-javascript-drum-kit/img/hihat-top.png" alt="Hi Hat cymbal">
+<div data-key="74" class="key snare">
+<kbd>J</kbd>
+</div>
+<div data-key="66" class="key kick">
+<kbd>B</kbd>
+</div>
+<div data-key="86" class="key kick2">
+<kbd>V</kbd>
+</div>
+<div data-key="72" class="key tom-high">
+<kbd>H</kbd>
+</div>
+<div data-key="71" class="key tom-mid">
+<kbd>G</kbd>
+</div>
+<div data-key="70" class="key tom-low">
+<kbd>F</kbd>
+</div>
+<div data-key="69" class="key crash">
+<kbd>E</kbd>
+</div>
+<div data-key="82" class="key ride">
+<kbd>R</kbd>
+</div>
+<div data-key="73" class="key hihat-open">
+<kbd>I</kbd>
+</div>
+<div data-key="75" class="key hihat-close">
+<kbd>K</kbd>
+</div>
+<img class="drum-kit" src="https://raw.githubusercontent.com/ArunMichaelDsouza/javascript-30-course/master/src/01-javascript-drum-kit/img/drum-kit.png" alt="Drum Kit" />
+</div>
+</section>
+</main>
+<audio data-key="74" src="https://raw.githubusercontent.com/ArunMichaelDsouza/javascript-30-course/master/src/01-javascript-drum-kit/sounds/snare.wav"></audio>
+<audio data-key="66" src="https://raw.githubusercontent.com/ArunMichaelDsouza/javascript-30-course/master/src/01-javascript-drum-kit/sounds/kick.wav"></audio>
+<audio data-key="86" src="https://raw.githubusercontent.com/ArunMichaelDsouza/javascript-30-course/master/src/01-javascript-drum-kit/sounds/kick.wav"></audio>
+<audio data-key="72" src="https://raw.githubusercontent.com/ArunMichaelDsouza/javascript-30-course/master/src/01-javascript-drum-kit/sounds/tom-high.wav"></audio>
+<audio data-key="71" src="https://raw.githubusercontent.com/ArunMichaelDsouza/javascript-30-course/master/src/01-javascript-drum-kit/sounds/tom-mid.wav"></audio>
+<audio data-key="70" src="https://raw.githubusercontent.com/ArunMichaelDsouza/javascript-30-course/master/src/01-javascript-drum-kit/sounds/tom-low.wav"></audio>
+<audio data-key="69" src="https://raw.githubusercontent.com/ArunMichaelDsouza/javascript-30-course/master/src/01-javascript-drum-kit/sounds/crash.wav"></audio>
+<audio data-key="82" src="https://raw.githubusercontent.com/ArunMichaelDsouza/javascript-30-course/master/src/01-javascript-drum-kit/sounds/ride.wav"></audio>
+<audio data-key="73" src="https://raw.githubusercontent.com/ArunMichaelDsouza/javascript-30-course/master/src/01-javascript-drum-kit/sounds/hihat-open.wav"></audio>
+<audio data-key="75" src="https://raw.githubusercontent.com/ArunMichaelDsouza/javascript-30-course/master/src/01-javascript-drum-kit/sounds/hihat-close.wav"></audio>
+<script src="https://static.codepen.io/assets/common/stopExecutionOnTimeout-157cd5b220a5c80d4ff8e0e70ac069bffd87a61252088146915e8726e5d9f147.js"></script>
+<script id="rendered-js">
+// JavaScript Drum Kit App
+
+{
+  const playingClass = 'playing',
+  crashRide = document.getElementById('crash-ride'),
+  hiHatTop = document.getElementById('hihat-top');
+
+  const animateCrashOrRide = () => {
+    crashRide.style.transform = 'rotate(0deg) scale(1.5)';
+  };
+
+  const animateHiHatClosed = () => {
+    hiHatTop.style.top = '171px';
+  };
+
+  const playSound = e => {
+    const keyCode = e.keyCode,
+    keyElement = document.querySelector(`div[data-key="${keyCode}"]`);
+
+    if (!keyElement) return;
+
+    const audioElement = document.querySelector(`audio[data-key="${keyCode}"]`);
+    audioElement.currentTime = 0;
+    audioElement.play();
+
+    switch (keyCode) {
+      case 69:
+      case 82:
+        animateCrashOrRide();
+        break;
+      case 75:
+        animateHiHatClosed();
+        break;}
+
+
+    keyElement.classList.add(playingClass);
+  };
+
+  const removeCrashRideTransition = e => {
+    if (e.propertyName !== 'transform') return;
+
+    e.target.style.transform = 'rotate(-7.2deg) scale(1.5)';
+  };
+
+  const removeHiHatTopTransition = e => {
+    if (e.propertyName !== 'top') return;
+
+    e.target.style.top = '166px';
+  };
+
+  const removeKeyTransition = e => {
+    if (e.propertyName !== 'transform') return;
+
+    e.target.classList.remove(playingClass);
+  };
+
+  const drumKeys = Array.from(document.querySelectorAll('.key'));
+
+  drumKeys.forEach(key => {
+    key.addEventListener('transitionend', removeKeyTransition);
+  });
+
+  crashRide.addEventListener('transitionend', removeCrashRideTransition);
+  hiHatTop.addEventListener('transitionend', removeHiHatTopTransition);
+
+  window.addEventListener('keydown', playSound);
+}
+//# sourceURL=pen.js
+    </script>
+</body>
+</html>
+
+
+{% endblock %}
